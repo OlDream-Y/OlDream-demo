@@ -1,0 +1,88 @@
+server:
+  port: 8080
+
+#mybatis
+mybatis:
+  type-aliases-package: club.oldream.miaosha.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+  mapper-locations: classpath:club/oldream/miaosha/dao/*.xml
+#druid
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.35.13.209:3306/miaosha?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: Yxh18844657858.
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      maxActive: 1000
+      initialSize: 100
+      maxWait: 60000
+      minIdle: 500
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: false
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+  #thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    servlet:
+      content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+  #static
+  resources:
+    add-mappings: true
+    cache:
+      period: 3600
+    chain:
+      cache: true
+      enabled: true
+      html-application-cache: true
+      compressed: true
+    static-locations: classpath:/static/
+  #rabbitmq
+  rabbitmq:
+    host: 101.35.13.209
+    port: 5672
+    username: yxh
+    password: 111111
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+        max-interval: 10000
+        multiplier: 1.0
+
+#redis
+redis:
+  host: 101.35.13.209
+  port: 6379
+  timeout: 10
+  password: Yxh18844657858.
+  poolMaxTotal: 1000
+  poolMaxIdle: 500
+  poolMaxWait: 500
+
+
